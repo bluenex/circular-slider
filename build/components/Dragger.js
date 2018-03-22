@@ -69,9 +69,13 @@ var Dragger = exports.Dragger = function (_Component) {
       _this.addEventListeners(true);
     }, _this.handleMouseUp = function (e) {
       (0, _eventHelpers.pauseEvent)(e);
+      var radialPos = _this.calcRadialPos((0, _eventHelpers.absMousePos)(e));
+      _this.props.onDragStop(radialPos);
       _this.removeEventListeners(false);
     }, _this.handleTouchEnd = function (e) {
       (0, _eventHelpers.pauseEvent)(e);
+      var radialPos = _this.calcRadialPos((0, _eventHelpers.absMousePos)(e));
+      _this.props.onDragStop(radialPos);
       _this.removeEventListeners(true);
     }, _this.handleMouseMove = function (e) {
       (0, _eventHelpers.pauseEvent)(e);
@@ -128,6 +132,7 @@ Dragger.propTypes = {
   absoluteContainerFunc: _propTypes2.default.func.isRequired,
   color: _propTypes2.default.string.isRequired,
   onMove: _propTypes2.default.func.isRequired,
+  onDragStop: _propTypes2.default.func.isRequired,
   radialPosition: _propTypes2.default.object.isRequired,
   relCenterPos: _propTypes2.default.object.isRequired,
   trueRadius: _propTypes2.default.number.isRequired,

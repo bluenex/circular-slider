@@ -67,6 +67,17 @@ var CircularSlider = exports.CircularSlider = function (_Component) {
       var deltaTheta = (0, _geometryHelpers.calcAngleDiff)(x, y, fiducialX, -fiducialY);
       var newAngle = _this.props.angle + deltaTheta;
       _this.props.onMove(newAngle);
+    }, _this.handleDragStop = function (_ref3) {
+      var x = _ref3.x,
+          y = _ref3.y;
+
+      var _polarToCartesian2 = (0, _geometryHelpers.polarToCartesian)(0, 0, _this.props.r, _this.props.angle),
+          fiducialX = _polarToCartesian2.x,
+          fiducialY = _polarToCartesian2.y;
+
+      var deltaTheta = (0, _geometryHelpers.calcAngleDiff)(x, y, fiducialX, -fiducialY);
+      var newAngle = _this.props.angle + deltaTheta;
+      _this.props.onDragStop(newAngle);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -110,6 +121,7 @@ var CircularSlider = exports.CircularSlider = function (_Component) {
           absoluteContainerFunc: this.absoluteContainerPosition,
           color: color,
           onMove: this.handleDrag,
+          onDragStop: this.handleDragStop,
           radialPosition: radialPosition,
           relCenterPos: relCenterPos,
           trueRadius: this.padding,
@@ -128,6 +140,7 @@ CircularSlider.propTypes = {
   arcStart: _propTypes2.default.number,
   color: _propTypes2.default.string,
   onMove: _propTypes2.default.func,
+  onDragStop: _propTypes2.default.func,
   r: _propTypes2.default.number,
   showArc: _propTypes2.default.bool,
   showNeedle: _propTypes2.default.bool
@@ -139,6 +152,7 @@ CircularSlider.defaultProps = {
   arcStart: 180,
   color: "darkseagreen",
   onMove: function onMove() {},
+  onDragStop: function onDragStop() {},
   r: 100,
   showArc: false,
   showNeedle: true
